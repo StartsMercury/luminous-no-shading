@@ -5,11 +5,17 @@
 	"name": "Luminous No Shading",
 	"description": "No shading for world and inventory forms of luminous objects.",
 	"authors": [
-		"StartsMercury"
+		{
+			"name": "StartsMercury",
+			"contact": {
+				"homepage": "https://github.com/StartsMercury"
+			}
+		}
 	],
 	"contact": {
-		"homepage": "https://github.com/StartsMercury/luminous-no-shading",
-		"sources": "https://github.com/StartsMercury/luminous-no-shading"
+		"homepage": "https://modrinth.com/mod/luminous-no-shading",
+		"sources": "https://github.com/StartsMercury/luminous-no-shading",
+		"issues": "https://github.com/StartsMercury/luminous-no-shading/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/luminous-no-shading/icon.png",
@@ -17,13 +23,22 @@
 	"entrypoints": {
 		"client": []
 	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.github_releases": "https://github.com/StartsMercury/luminous-no-shading/releases",
+				"modmenu.modrinth": "https://modrinth.com/mod/luminous-no-shading"
+			}
+		}
+	},
 	"mixins": [
 		"luminous-no-shading.mixins.json"
 	],
 	"accessWidener": "luminous-no-shading.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15",
-		"java": ">=${version_java}"
+		"java": ">=${version_java}",
+		"minecraft": "*"
 	},
 	"recommends": {
 		"minecraft": "${version_minecraft}"
