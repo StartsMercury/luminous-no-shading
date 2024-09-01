@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "luminous-no-shading",
+	"version": "${version}",
+	"name": "Luminous No Shading",
+	"description": "No shading for world and inventory forms of luminous objects.",
+	"authors": [
+		"StartsMercury"
+	],
+	"contact": {
+		"homepage": "https://github.com/StartsMercury/luminous-no-shading",
+		"sources": "https://github.com/StartsMercury/luminous-no-shading"
+	},
+	"license": "MIT",
+	"icon": "assets/luminous-no-shading/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": []
+	},
+	"mixins": [
+		"luminous-no-shading.mixins.json"
+	],
+	"accessWidener": "luminous-no-shading.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.15",
+		"java": ">=${version_java}"
+	},
+	"recommends": {
+		"minecraft": "${version_minecraft}"
+	}
+}

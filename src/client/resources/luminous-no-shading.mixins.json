@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "package": "io.github.startsmercury.luminous_no_shading.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "block.minecraft.LiquidBlockRendererMixin",
+    "block.minecraft.ModelBlockRendererMixin",
+    "block_entity.minecraft.ConduitRendererMixin",
+    "block_entity.minecraft.EnchantTableRendererMixin",
+    "block_entity.minecraft.SheetsMixin",
+    "entity.minecraft.EntityRenderersMixin",
+    "item.minecraft.ItemBlockRenderTypesMixin",
+    "shader.minecraft.GameRendererMixin",
+    "shader.minecraft.RenderStateShardMixin",
+    "shader.minecraft.RenderTypeMixin",
+    "shader.minecraft.ShaderInstance$1Mixin",
+    "shader.minecraft.ShaderInstanceMixin",
+    "shader.minecraft.SheetsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
