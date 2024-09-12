@@ -35,13 +35,22 @@ loom {
 }
 
 repositories {
-
+    maven {
+        name = "Modrinth Maven"
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${Constants.VERSION_MINECRAFT}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:0.16.5")
+
+    modCompileOnly("maven.modrinth:sodium:mc1.20.1-0.5.11")
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.92.2+1.20.1"))
 }
 
 tasks.withType<ProcessResources> {
