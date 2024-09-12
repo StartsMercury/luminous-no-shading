@@ -2,7 +2,7 @@ object Constants {
     const val VERSION = "0.2.0"
 
     const val VERSION_JAVA = 21
-    const val VERSION_MINECRAFT = "1.21"
+    const val VERSION_MINECRAFT = "1.21.1"
 }
 
 plugins {
@@ -50,7 +50,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:0.16.5")
 
     modCompileOnly("maven.modrinth:sodium:mc1.21-0.6.0-beta.1-fabric")
-    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.102.0+1.21"))
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.104.0+1.21.1"))
 }
 
 tasks.withType<ProcessResources> {
