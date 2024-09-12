@@ -1,8 +1,8 @@
 object Constants {
     const val VERSION = "0.2.0"
 
-    const val VERSION_JAVA = 17
-    const val VERSION_MINECRAFT = "1.20.1"
+    const val VERSION_JAVA = 21
+    const val VERSION_MINECRAFT = "1.20.6"
 }
 
 plugins {
@@ -49,8 +49,8 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:0.16.5")
 
-    modCompileOnly("maven.modrinth:sodium:mc1.20.1-0.5.11")
-    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.92.2+1.20.1"))
+    modCompileOnly("maven.modrinth:sodium:mc1.20.6-0.5.11")
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.100.8+1.20.6"))
 }
 
 tasks.withType<ProcessResources> {
