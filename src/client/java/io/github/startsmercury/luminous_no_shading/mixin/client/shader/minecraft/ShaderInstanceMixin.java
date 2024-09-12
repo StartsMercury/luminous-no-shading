@@ -45,7 +45,6 @@ public class ShaderInstanceMixin {
     ) {
         if (resourceProvider instanceof ResourceProviderWrapper) {
             this.name = string + "_no_shade";
-            System.out.println(this.name);
         }
     }
 
