@@ -27,7 +27,9 @@ public abstract class RenderTypeMixin {
     ) {
         final var resourceLocation = resourceLocationRef.get();
         if ("luminous-no-shading".equals(resourceLocation.getNamespace())) {
-            resourceLocationRef.set(new ResourceLocation(resourceLocation.getPath()));
+            resourceLocationRef.set(
+                ResourceLocation.withDefaultNamespace(resourceLocation.getPath())
+            );
             custom.set(true);
         }
     }

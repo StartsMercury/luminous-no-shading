@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LuminousNoShadingImpl {
 	public static ResourceLocation mangle(final ResourceLocation resourceLocation) {
-		return new ResourceLocation("luminous-no-shading", resourceLocation.getPath());
+		return ResourceLocation.fromNamespaceAndPath("luminous-no-shading", resourceLocation.getPath());
 	}
 
 	public static ShaderInstance rendertypeEntityCutoutNoCullShader;

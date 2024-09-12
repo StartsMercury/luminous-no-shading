@@ -5,8 +5,8 @@
   "client": [
     "block.minecraft.LiquidBlockRendererMixin",
     "block.minecraft.ModelBlockRendererMixin",
-    "block.sodium.BlockRendererMixin",
-    "block.sodium.FluidRendererMixin",
+    "block.sodium.AbstractBlockRenderContextMixin",
+    "block.sodium.DefaultFluidRendererMixin",
     "block_entity.minecraft.ConduitRendererMixin",
     "block_entity.minecraft.EnchantTableRendererMixin",
     "block_entity.minecraft.SheetsMixin",
