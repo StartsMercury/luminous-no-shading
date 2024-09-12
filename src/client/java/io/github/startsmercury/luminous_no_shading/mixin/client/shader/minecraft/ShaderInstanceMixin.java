@@ -73,9 +73,9 @@ public class ShaderInstanceMixin {
         // TODO fix path to not get merged by vanilla equivalent shader
         if (
             type == Program.Type.FRAGMENT
-                && resourceProvider instanceof ResourceProviderWrapper(final var inner)
+                && resourceProvider instanceof final ResourceProviderWrapper wrapper
         ) {
-            return inner;
+            return wrapper.inner();
         } else {
             return resourceProvider;
         }

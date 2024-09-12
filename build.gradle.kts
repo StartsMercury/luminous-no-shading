@@ -1,7 +1,7 @@
 object Constants {
     const val VERSION = "0.1.0"
 
-    const val VERSION_JAVA = 21
+    const val VERSION_JAVA = 17
     const val VERSION_MINECRAFT = "1.20.1"
 }
 
