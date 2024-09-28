@@ -2,7 +2,7 @@ object Constants {
     const val VERSION = "0.2.0"
 
     const val VERSION_JAVA = 21
-    const val VERSION_MINECRAFT = "1.21.1"
+    const val VERSION_MINECRAFT = "24w39a"
 }
 
 plugins {
@@ -50,14 +50,14 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:0.16.5")
 
     modCompileOnly("maven.modrinth:sodium:mc1.21-0.6.0-beta.1-fabric")
-    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.104.0+1.21.1"))
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.105.1+1.21.2"))
 }
 
 tasks.withType<ProcessResources> {
     val data = mapOf(
         "version" to Constants.VERSION,
         "version_java" to Constants.VERSION_JAVA,
-        "version_minecraft" to Constants.VERSION_MINECRAFT,
+        "version_minecraft" to "1.21.2-alpha.24.39.a",
     )
 
     inputs.properties(data)

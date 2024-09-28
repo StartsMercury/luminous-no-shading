@@ -12,11 +12,11 @@
     "block_entity.minecraft.SheetsMixin",
     "entity.minecraft.EntityRenderersMixin",
     "item.minecraft.ItemBlockRenderTypesMixin",
-    "shader.minecraft.GameRendererMixin",
+    "shader.minecraft.CoreShadersMixin",
     "shader.minecraft.RenderStateShardMixin",
     "shader.minecraft.RenderTypeMixin",
-    "shader.minecraft.ShaderInstance$1Mixin",
-    "shader.minecraft.ShaderInstanceMixin",
+    "shader.minecraft.ShaderManager$CompilationCacheMixin",
+    "shader.minecraft.ShaderManagerMixin",
     "shader.minecraft.SheetsMixin"
   ],
   "injectors": {

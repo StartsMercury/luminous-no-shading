@@ -13,7 +13,6 @@ public final class NoShadingSheets {
 
     private static final RenderType CUTOUT_BLOCK_SHEET = RenderType.entityCutout(MANGLED_LOCATION_BLOCKS);
     private static final RenderType TRANSLUCENT_ITEM_CULL_BLOCK_SHEET = RenderType.itemEntityTranslucentCull(MANGLED_LOCATION_BLOCKS);
-    private static final RenderType TRANSLUCENT_CULL_BLOCK_SHEET = RenderType.entityTranslucentCull(MANGLED_LOCATION_BLOCKS);
 
     public static RenderType cutoutBlockSheet() {
         return CUTOUT_BLOCK_SHEET;
@@ -21,9 +20,5 @@ public final class NoShadingSheets {
 
     public static RenderType translucentItemSheet() {
         return TRANSLUCENT_ITEM_CULL_BLOCK_SHEET;
-    }
-
-    public static RenderType translucentCullBlockSheet() {
-        return TRANSLUCENT_CULL_BLOCK_SHEET;
     }
 }
