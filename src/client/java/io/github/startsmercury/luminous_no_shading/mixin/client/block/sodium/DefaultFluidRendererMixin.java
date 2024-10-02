@@ -16,8 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DefaultFluidRendererMixin {
     @Inject(
         method = "render",
-        at = @At(value = "FIELD", shift = At.Shift.AFTER, ordinal = 0, target = "Lnet/caffeinemc/mods/sodium/client/util/DirectionUtil;HORIZONTAL_DIRECTIONS:[Lnet/minecraft/core/Direction;"),
-        remap = false
+        at = @At(value = "FIELD", shift = At.Shift.AFTER, ordinal = 0, target = "Lnet/caffeinemc/mods/sodium/client/util/DirectionUtil;HORIZONTAL_DIRECTIONS:[Lnet/minecraft/core/Direction;")
     )
     private void detectLuminosity(
         final CallbackInfo callback,
