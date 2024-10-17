@@ -49,6 +49,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:0.16.5")
 
+    modCompileOnly("maven.modrinth:iris:1.7.2+1.20.6")
     modCompileOnly("maven.modrinth:sodium:mc1.20.6-0.5.11")
     modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.100.8+1.20.6"))
 }
