@@ -21,7 +21,9 @@
 	"icon": "assets/luminous-no-shading/icon.png",
 	"environment": "client",
 	"entrypoints": {
-		"client": []
+		"client": [
+			"io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl::applyRenderTypes"
+		]
 	},
 	"custom": {
 		"modmenu": {

@@ -1,9 +1,8 @@
 package io.github.startsmercury.luminous_no_shading.impl.client;
 
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 
-public final class  NoShadingRenderStateShards {
+public final class NoShadingRenderStateShards {
     public static void init() {}
 
     public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_NO_CULL_SHADER =
