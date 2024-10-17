@@ -54,23 +54,30 @@ dependencies {
     modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.105.1+1.21.2"))
 }
 
-tasks.withType<ProcessResources> {
-    val data = mapOf(
-        "version" to Constants.VERSION,
-        "version_java" to Constants.VERSION_JAVA,
-        "version_minecraft" to "1.21.2-alpha.24.40.a",
-    )
-
-    inputs.properties(data)
-
-    filesMatching("fabric.mod.json") {
-        expand(data)
+tasks {
+    val validateMixinName by registering(net.fabricmc.loom.task.ValidateMixinNameTask::class) {
+        source(sourceSets.main.get().output)
+        source(sourceSets.named("client").get().output)
     }
-}
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-    options.release = Constants.VERSION_JAVA
+    withType<ProcessResources> {
+        val data = mapOf(
+            "version" to Constants.VERSION,
+            "version_java" to Constants.VERSION_JAVA,
+            "version_minecraft" to "1.21.2-alpha.24.40.a",
+        )
+
+        inputs.properties(data)
+
+        filesMatching("fabric.mod.json") {
+            expand(data)
+        }
+    }
+
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+        options.release = Constants.VERSION_JAVA
+    }
 }
 
 fun createVersionString(): String {
