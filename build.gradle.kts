@@ -35,23 +35,13 @@ loom {
 }
 
 repositories {
-    maven {
-        name = "Modrinth Maven"
-        url = uri("https://api.modrinth.com/maven")
-        content {
-            includeGroup("maven.modrinth")
-        }
-    }
+
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${Constants.VERSION_MINECRAFT}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:0.16.7")
-
-    modCompileOnly("maven.modrinth:iris:1.8.0-beta.4+1.21-fabric")
-    modCompileOnly("maven.modrinth:sodium:mc1.21-0.6.0-beta.2-fabric")
-    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.104.0+1.21.1"))
 }
 
 tasks {
@@ -77,6 +67,59 @@ tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.release = Constants.VERSION_JAVA
+    }
+}
+
+/******************************************************************************/
+/* COMPATIBILITY TESTS                                                        */
+/******************************************************************************/
+
+repositories {
+    maven {
+        name = "Modrinth Maven"
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+}
+
+run {
+    val iris = "maven.modrinth:iris:1.8.0-beta.4+1.21-fabric"
+    val sodium = "maven.modrinth:sodium:mc1.21-0.6.0-beta.2-fabric"
+
+    createCompatTest("iris", iris, sodium)
+    createCompatTest("sodium", sodium)
+}
+
+/******************************************************************************/
+/* HELPER FUNCTIONS                                                           */
+/******************************************************************************/
+
+fun createCompatTest(name: String, objectNotation: Any, vararg dependencyNotations: Any) {
+    val config = configurations.register(name)
+    val configClasspath = configurations.register("${name}Classpath") {
+        extendsFrom(config.get())
+    }
+    configurations {
+        val modCompileOnly by getting {
+            extendsFrom(config.get())
+        }
+    }
+
+    dependencies {
+        add(name, objectNotation)
+        dependencyNotations.forEach {
+            add("${name}Classpath", it)
+        }
+    }
+
+    afterEvaluate {
+        loom.runs.register(name) {
+            client()
+
+            property("fabric.addMods", configClasspath.get().files.joinToString(File.pathSeparator))
+        }
     }
 }
 
