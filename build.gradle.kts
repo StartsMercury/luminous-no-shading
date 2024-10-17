@@ -92,6 +92,10 @@ run {
     createCompatTest("sodium", sodium)
 }
 
+dependencies {
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.102.0+1.21"))
+}
+
 /******************************************************************************/
 /* HELPER FUNCTIONS                                                           */
 /******************************************************************************/
