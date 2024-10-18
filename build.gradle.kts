@@ -2,7 +2,7 @@ object Constants {
     const val VERSION = "0.2.2"
 
     const val VERSION_JAVA = 21
-    const val VERSION_MINECRAFT = "1.21.2-pre5"
+    const val VERSION_MINECRAFT = "1.21.2-rc1"
 }
 
 plugins {
@@ -54,7 +54,7 @@ tasks {
         val data = mapOf(
             "version" to Constants.VERSION,
             "version_java" to Constants.VERSION_JAVA,
-            "version_minecraft" to "1.21.2-beta.5",
+            "version_minecraft" to "1.21.2-rc.1",
         )
 
         inputs.properties(data)
