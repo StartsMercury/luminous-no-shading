@@ -61,8 +61,6 @@ public abstract class ShaderManagerMixin {
             map
         );
 
-        final var a = glslPreprocessor.process(string);
-        System.out.println(String.join("", a) + "\n");
         builder.put(
             new ShaderManager.ShaderSourceKey(
                 resourceLocation2.withPath(
@@ -70,7 +68,7 @@ public abstract class ShaderManagerMixin {
                 ),
                 type
             ),
-            String.join("", a)
+            String.join("", glslPreprocessor.process(string))
         );
     }
 }
