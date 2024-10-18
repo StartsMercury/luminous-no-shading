@@ -93,7 +93,7 @@ run {
 }
 
 dependencies {
-    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.105.1+1.21.2"))
+    modCompileOnly(fabricApi.module("fabric-rendering-data-attachment-v1", "0.105.3+1.21.2"))
 }
 
 /******************************************************************************/
