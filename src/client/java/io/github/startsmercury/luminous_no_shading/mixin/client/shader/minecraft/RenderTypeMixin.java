@@ -75,7 +75,7 @@ public abstract class RenderTypeMixin {
         final @Share("custom") LocalBooleanRef custom
     ) {
         if (custom.get()) {
-            return NoShadingRenderStateShards.RENDERTYPE_TRANSLUCENT_SHADER;
+            return NoShadingRenderStateShards.RENDERTYPE_ENTITY_CUTOUT_NO_CULL_SHADER;
         } else {
             return original;
         }

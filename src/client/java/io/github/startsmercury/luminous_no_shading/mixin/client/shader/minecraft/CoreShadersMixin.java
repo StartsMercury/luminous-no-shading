@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingCoreShaders;
 import net.minecraft.client.renderer.CoreShaders;
+import net.minecraft.client.renderer.ShaderDefines;
 import net.minecraft.client.renderer.ShaderProgram;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,6 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CoreShadersMixin {
     @Shadow
     private static ShaderProgram register(final String string, final VertexFormat vertexFormat) {
+        throw new AssertionError();
+    }
+
+    @Shadow
+    private static ShaderProgram register(
+        final String string,
+        final VertexFormat vertexFormat,
+        final ShaderDefines shaderDefines
+    ) {
         throw new AssertionError();
     }
 
@@ -40,8 +50,9 @@ public abstract class CoreShadersMixin {
     )
     private static void registerCustomEntitySolid(final CallbackInfo callback) {
         NoShadingCoreShaders.RENDERTYPE_ENTITY_SOLID = register(
-            "rendertype_entity_solid_no_shading",
-            DefaultVertexFormat.NEW_ENTITY
+            "rendertype_entity_solid_luminous",
+            DefaultVertexFormat.NEW_ENTITY,
+            ShaderDefines.builder().define("NO_CARDINAL_LIGHTING").build()
         );
     }
 
@@ -92,8 +103,36 @@ public abstract class CoreShadersMixin {
     )
     private static void registerCustomEntityCutout(final CallbackInfo callback) {
         NoShadingCoreShaders.RENDERTYPE_ENTITY_CUTOUT = register(
-            "rendertype_entity_cutout_no_shading",
-            DefaultVertexFormat.NEW_ENTITY
+            "rendertype_entity_cutout_luminous",
+            DefaultVertexFormat.NEW_ENTITY,
+            ShaderDefines.builder().define("NO_CARDINAL_LIGHTING").build()
+        );
+    }
+
+    @Inject(
+        method = "<clinit>",
+        at = @At(
+            value = "INVOKE",
+            shift = At.Shift.AFTER,
+            target = """
+            Lnet/minecraft/client/renderer/CoreShaders;     \
+            register (                                      \
+                Ljava/lang/String;                          \
+                Lcom/mojang/blaze3d/vertex/VertexFormat;    \
+            ) Lnet/minecraft/client/renderer/ShaderProgram; \
+        """,
+            ordinal = 0
+        ),
+        slice = @Slice(from = @At(
+            value = "CONSTANT",
+            args = "stringValue=rendertype_entity_cutout_no_cull"
+        ))
+    )
+    private static void registerCustomEntityCutoutNoCull(final CallbackInfo callback) {
+        NoShadingCoreShaders.RENDERTYPE_ENTITY_CUTOUT_NO_CULL = register(
+            "rendertype_entity_cutout_no_cull_luminous",
+            DefaultVertexFormat.NEW_ENTITY,
+            ShaderDefines.builder().define("NO_CARDINAL_LIGHTING").build()
         );
     }
 

@@ -7,6 +7,7 @@ import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShading
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingGlslPreprocessor;
 import net.minecraft.FileUtil;
 import net.minecraft.client.renderer.ShaderManager;
+import net.minecraft.client.renderer.ShaderProgramConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +32,8 @@ public abstract class ShaderManagerMixin {
         at = @At(value = "INVOKE", shift = At.Shift.AFTER, remap = false, target = """
             Lcom/google/common/collect/ImmutableMap$Builder;   \
             put (                                              \
-                Ljava/lang/Object;Ljava/lang/Object;           \
+                Ljava/lang/Object;                             \
+                Ljava/lang/Object;                             \
             ) Lcom/google/common/collect/ImmutableMap$Builder; \
         """)
     )
@@ -48,8 +50,7 @@ public abstract class ShaderManagerMixin {
         final @Local(ordinal = 0) String string
     ) {
         switch (resourceLocation.getPath()) {
-            case "shaders/core/entity.vsh",
-                 "shaders/core/rendertype_item_entity_translucent_cull.vsh",
+            case "shaders/core/rendertype_item_entity_translucent_cull.vsh",
                  "shaders/core/terrain.vsh":
                 break;
             default:
@@ -70,5 +71,43 @@ public abstract class ShaderManagerMixin {
             ),
             String.join("", glslPreprocessor.process(string))
         );
+    }
+
+    @Inject(
+        method = "loadProgram",
+        at = @At(
+            value = "INVOKE",
+            target = """
+                Lcom/google/common/collect/ImmutableMap$Builder;   \
+                put (                                              \
+                    Ljava/lang/Object;                             \
+                    Ljava/lang/Object;                             \
+                ) Lcom/google/common/collect/ImmutableMap$Builder; \
+            """,
+            remap = false
+        )
+    )
+    private static void loadCustomProgram(
+        final CallbackInfo callback,
+        final @Local(ordinal = 0, argsOnly = true) ResourceLocation resourceLocation,
+        final @Local(ordinal = 0, argsOnly = true) Resource resource,
+        final @Local(ordinal = 0, argsOnly = true) ImmutableMap.Builder<ResourceLocation, ShaderProgramConfig> builder,
+        final @Local(ordinal = 1) ResourceLocation resourceLocation2,
+        final @Local(ordinal = 0) ShaderProgramConfig config
+    ) {
+        switch (resourceLocation.getPath()) {
+            case "shaders/core/rendertype_entity_cutout.json",
+                 "shaders/core/rendertype_entity_cutout_no_cull.json",
+                 "shaders/core/rendertype_entity_solid.json":
+                break;
+            default:
+                return;
+        }
+
+        final var resourceLocation3 = resourceLocation2.withPath(
+            path -> path + "_luminous"
+        );
+
+        builder.put(resourceLocation3, config);
     }
 }

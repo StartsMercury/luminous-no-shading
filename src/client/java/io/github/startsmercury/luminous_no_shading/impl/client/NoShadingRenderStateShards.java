@@ -14,6 +14,11 @@ public final class NoShadingRenderStateShards {
     public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_SHADER =
         new RenderStateShard.ShaderStateShard(NoShadingCoreShaders.RENDERTYPE_ENTITY_CUTOUT);
 
+    public static final RenderStateShard.ShaderStateShard RENDERTYPE_ENTITY_CUTOUT_NO_CULL_SHADER =
+        new RenderStateShard.ShaderStateShard(
+            NoShadingCoreShaders.RENDERTYPE_ENTITY_CUTOUT_NO_CULL
+        );
+
     public static final RenderStateShard.ShaderStateShard RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL_SHADER =
         new RenderStateShard.ShaderStateShard(
             NoShadingCoreShaders.RENDERTYPE_ITEM_ENTITY_TRANSLUCENT_CULL
