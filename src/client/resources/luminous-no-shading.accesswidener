@@ -1,8 +1,6 @@
 accessWidener v2 named
 
 mutable    field  net/minecraft/client/model/Model renderType Ljava/util/function/Function;
-accessible class  net/minecraft/client/renderer/RenderStateShard$ShaderStateShard
-accessible field  net/minecraft/client/renderer/RenderStateShard RENDERTYPE_TRANSLUCENT_SHADER Lnet/minecraft/client/renderer/RenderStateShard$ShaderStateShard;
 accessible class  net/minecraft/client/renderer/RenderType$CompositeRenderType
 accessible class  net/minecraft/client/renderer/RenderType$CompositeState
 accessible class  net/minecraft/client/renderer/ShaderManager$ShaderSourceKey

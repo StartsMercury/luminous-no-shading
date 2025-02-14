@@ -14,7 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.LoggerFactory;
 
 public class LuminousNoShadingImpl {
-	public static final String CUSTOM_SHADER_SUFFIX = "_no_shading";
+	public static final String LUMINOUS_SUFFIX = "_luminous";
+	public static final String NO_SHADING_SUFFIX = "_no_shading";
 
 	public static void resetMinimalRenderTypes() {
 		ClearRenderType.clear(ConduitRenderer.SHELL_TEXTURE);

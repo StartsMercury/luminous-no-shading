@@ -1,13 +1,14 @@
 package io.github.startsmercury.luminous_no_shading.mixin.client.shader.minecraft;
 
 import com.google.common.collect.ImmutableMap;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.shaders.CompiledShader;
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingGlslPreprocessor;
 import net.minecraft.FileUtil;
 import net.minecraft.client.renderer.ShaderManager;
-import net.minecraft.client.renderer.ShaderProgramConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,7 +66,7 @@ public abstract class ShaderManagerMixin {
         builder.put(
             new ShaderManager.ShaderSourceKey(
                 resourceLocation2.withPath(
-                    path -> path + LuminousNoShadingImpl.CUSTOM_SHADER_SUFFIX
+                    path -> path + LuminousNoShadingImpl.NO_SHADING_SUFFIX
                 ),
                 type
             ),
@@ -73,8 +74,8 @@ public abstract class ShaderManagerMixin {
         );
     }
 
-    @Inject(
-        method = "loadProgram",
+    @WrapOperation(
+        method = "loadPostChain",
         at = @At(
             value = "INVOKE",
             target = """
@@ -87,27 +88,29 @@ public abstract class ShaderManagerMixin {
             remap = false
         )
     )
-    private static void loadCustomProgram(
-        final CallbackInfo callback,
+    private static <K, V> ImmutableMap.Builder<K, V> loadCustomProgram(
+        ImmutableMap.Builder instance,
+        final K key,
+        final V value,
+        final Operation<ImmutableMap.Builder<K, V>> original,
         final @Local(ordinal = 0, argsOnly = true) ResourceLocation resourceLocation,
-        final @Local(ordinal = 0, argsOnly = true) Resource resource,
-        final @Local(ordinal = 0, argsOnly = true) ImmutableMap.Builder<ResourceLocation, ShaderProgramConfig> builder,
-        final @Local(ordinal = 1) ResourceLocation resourceLocation2,
-        final @Local(ordinal = 0) ShaderProgramConfig config
+        final @Local(ordinal = 1) ResourceLocation resourceLocation2
     ) {
+        instance = original.call(instance, key, value);
+
         switch (resourceLocation.getPath()) {
-            case "shaders/core/rendertype_entity_cutout.json",
-                 "shaders/core/rendertype_entity_cutout_no_cull.json",
-                 "shaders/core/rendertype_entity_solid.json":
+            case "post_effect/entity_cutout.json",
+                 "post_effect/entity_cutout_no_cull.json",
+                 "post_effect/entity_solid.json":
                 break;
             default:
-                return;
+                return null;
         }
 
         final var resourceLocation3 = resourceLocation2.withPath(
-            path -> path + "_luminous"
+            path -> path + LuminousNoShadingImpl.LUMINOUS_SUFFIX
         );
 
-        builder.put(resourceLocation3, config);
+        return instance.put(resourceLocation3, value);
     }
 }

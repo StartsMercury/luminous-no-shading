@@ -12,7 +12,7 @@ public class ModelBlockRendererMixin {
     @ModifyExpressionValue(
         method = { "renderModelFaceAO", "renderModelFaceFlat" },
         at = @At(value = "INVOKE", target = """
-            Lnet/minecraft/client/renderer/block/model/BakedQuad;isShade()Z\
+            Lnet/minecraft/client/renderer/block/model/BakedQuad;shade()Z\
         """)
     )
     private boolean modifyShade(
