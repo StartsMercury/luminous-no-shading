@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
-    @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/GuiGraphics;<init>(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"))
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
     private void applyRenderTypes(final CallbackInfo callback) {
         LuminousNoShadingImpl.setOnGui(true);
         if (LuminousNoShadingImpl.isGuiOnly()) {
@@ -18,7 +18,7 @@ public class GameRendererMixin {
         }
     }
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;flush()V"))
+    @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/render/GuiRenderer;render()V"))
     private void resetRenderTypes(final CallbackInfo callback) {
         if (LuminousNoShadingImpl.isGuiOnly()) {
             LuminousNoShadingImpl.resetMinimalRenderTypes();
