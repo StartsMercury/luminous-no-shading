@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.shaders.CompiledShader;
+import com.mojang.blaze3d.shaders.ShaderType;
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingGlslPreprocessor;
 import net.minecraft.FileUtil;
@@ -25,7 +25,7 @@ public abstract class ShaderManagerMixin {
             loadShader (                                         \
                 Lnet/minecraft/resources/ResourceLocation;       \
                 Lnet/minecraft/server/packs/resources/Resource;  \
-                Lcom/mojang/blaze3d/shaders/CompiledShader$Type; \
+                Lcom/mojang/blaze3d/shaders/ShaderType;          \
                 Ljava/util/Map;                                  \
                 Lcom/google/common/collect/ImmutableMap$Builder; \
             ) V                                                  \
@@ -41,7 +41,7 @@ public abstract class ShaderManagerMixin {
     private static void loadCustomShader(
         final CallbackInfo callback,
         final @Local(ordinal = 0, argsOnly = true) ResourceLocation resourceLocation,
-        final @Local(ordinal = 0, argsOnly = true) CompiledShader.Type type,
+        final @Local(ordinal = 0, argsOnly = true) ShaderType type,
         final @Local(ordinal = 0, argsOnly = true) Map<ResourceLocation, Resource> map,
         final @Local(ordinal = 0, argsOnly = true) ImmutableMap.Builder<
             ShaderManager.ShaderSourceKey,
