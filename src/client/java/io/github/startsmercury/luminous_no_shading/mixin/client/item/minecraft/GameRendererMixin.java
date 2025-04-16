@@ -18,7 +18,7 @@ public class GameRendererMixin {
         }
     }
 
-    @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/render/GuiRenderer;render()V"))
+    @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/render/GuiRenderer;render(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V", ordinal = 0))
     private void resetRenderTypes(final CallbackInfo callback) {
         if (LuminousNoShadingImpl.isGuiOnly()) {
             LuminousNoShadingImpl.resetMinimalRenderTypes();
