@@ -54,7 +54,7 @@ tasks {
         val data = mapOf(
             "version" to Constants.VERSION,
             "version_java" to Constants.VERSION_JAVA,
-            "version_minecraft" to "1.21.2",
+            "version_minecraft" to Constants.VERSION_MINECRAFT,
         )
 
         inputs.properties(data)
