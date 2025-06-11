@@ -1,4 +1,4 @@
-package io.github.startsmercury.luminous_no_shading.mixin.client.item.minecraft;
+package io.github.startsmercury.luminous_no_shading.mixin.client.gui.minecraft;
 
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import net.minecraft.client.renderer.GameRenderer;
@@ -9,7 +9,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            shift = At.Shift.AFTER,
+            target = """
+                Lnet/minecraft/client/gui/GuiGraphics;                     \
+                <init> (                                                   \
+                    Lnet/minecraft/client/Minecraft;                       \
+                    Lnet/minecraft/client/gui/render/state/GuiRenderState; \
+                ) V                                                        \
+            """
+        )
+    )
     private void applyRenderTypes(final CallbackInfo callback) {
         LuminousNoShadingImpl.setOnGui(true);
         if (LuminousNoShadingImpl.isGuiOnly()) {
@@ -18,7 +31,13 @@ public class GameRendererMixin {
         }
     }
 
-    @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gui/render/GuiRenderer;render(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V", ordinal = 0))
+    @Inject(
+        method = "render",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;NONE:Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;"
+        )
+    )
     private void resetRenderTypes(final CallbackInfo callback) {
         if (LuminousNoShadingImpl.isGuiOnly()) {
             LuminousNoShadingImpl.resetMinimalRenderTypes();
