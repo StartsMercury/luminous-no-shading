@@ -1,25 +1,25 @@
 {
-  "required": true,
-  "package": "io.github.startsmercury.luminous_no_shading.mixin.client",
-  "compatibilityLevel": "JAVA_21",
-  "client": [
-    "block.minecraft.LiquidBlockRendererMixin",
-    "block.minecraft.ModelBlockRendererMixin",
-    "block.sodium.AbstractBlockRenderContextMixin",
-    "block.sodium.DefaultFluidRendererMixin",
-    "block_entity.minecraft.MaterialMixin",
-    "compat.iris.IrisConfigMixin",
-    "entity.minecraft.EntityRenderersMixin",
-    "item.minecraft.GameRendererMixin",
-    "item.minecraft.ItemBlockRenderTypesMixin",
-    "shader.minecraft.CoreShadersMixin",
-    "shader.minecraft.RenderStateShardMixin",
-    "shader.minecraft.RenderTypeMixin",
-    "shader.minecraft.ShaderManager$CompilationCacheMixin",
-    "shader.minecraft.ShaderManagerMixin",
-    "shader.minecraft.SheetsMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "package": "io.github.startsmercury.luminous_no_shading.mixin.client",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "block.minecraft.LiquidBlockRendererMixin",
+        "block.minecraft.ModelBlockRendererMixin",
+        "block.sodium.AbstractBlockRenderContextMixin",
+        "block.sodium.DefaultFluidRendererMixin",
+        "block_entity.minecraft.MaterialMixin",
+        "compat.iris.IrisConfigMixin",
+        "entity.minecraft.EntityRenderersMixin",
+        "gui.minecraft.GameRendererMixin",
+        "item.minecraft.ItemBlockRenderTypesMixin",
+        "shader.minecraft.CoreShadersMixin",
+        "shader.minecraft.RenderStateShardMixin",
+        "shader.minecraft.RenderTypeMixin",
+        "shader.minecraft.ShaderManager$CompilationCacheMixin",
+        "shader.minecraft.ShaderManagerMixin",
+        "shader.minecraft.SheetsMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }
