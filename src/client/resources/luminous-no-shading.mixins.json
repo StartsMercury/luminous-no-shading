@@ -11,7 +11,7 @@
         "compat.iris.IrisConfigMixin",
         "entity.minecraft.EntityRenderersMixin",
         "item.minecraft.ChestSpecialRendererMixin",
-        "item.minecraft.GameRendererMixin",
+        "gui.minecraft.GameRendererMixin",
         "item.minecraft.ItemBlockRenderTypesMixin",
         "shader.minecraft.RenderPipelinesMixin",
         "shader.minecraft.RenderTypeMixin",
