@@ -87,8 +87,6 @@ public class LuminousNoShadingImpl {
 	public static RenderType modifyBlockRenderType(final RenderType original, final BlockState state) {
 		if (state.getLightEmission() <= 0) {
 			return original;
-		} else if (original == RenderType.translucent()) {
-			return NoShadingRenderTypes.translucent();
 		} else if (original == Sheets.translucentItemSheet()) {
 			return NoShadingSheets.translucentItemSheet();
 		} else if (original == Sheets.cutoutBlockSheet()) {
