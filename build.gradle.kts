@@ -92,7 +92,7 @@ loom {
 }
 run {
     val iris = "maven.modrinth:iris:1.8.11+1.21.5-fabric"
-    val sodium = "maven.modrinth:sodium:mc1.21.5-0.6.13-fabric"
+    val sodium = "maven.modrinth:sodium:mc1.21.6-0.6.13-fabric"
 
     createCompatTest("iris", iris, sodium)
     createCompatTest("sodium", sodium)
