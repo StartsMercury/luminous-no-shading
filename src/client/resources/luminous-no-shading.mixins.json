@@ -10,8 +10,9 @@
         "block_entity.minecraft.MaterialMixin",
         "compat.iris.IrisConfigMixin",
         "entity.minecraft.EntityRenderersMixin",
-        "item.minecraft.ChestSpecialRendererMixin",
         "gui.minecraft.GameRendererMixin",
+        "item.minecraft.ChestSpecialRendererMixin",
+        "item.minecraft.ConduitSpecialRendererMixin",
         "item.minecraft.ItemBlockRenderTypesMixin",
         "shader.minecraft.RenderPipelinesMixin",
         "shader.minecraft.RenderTypeMixin",
@@ -20,5 +21,5 @@
     ],
     "injectors": {
         "defaultRequire": 1
-  }
+    }
 }
