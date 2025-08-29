@@ -36,13 +36,11 @@ public class ChestSpecialRendererMixin {
         method = "render",
         at = @At(
             value = "INVOKE",
-            target = """
-                Lnet/minecraft/client/resources/model/Material;       \
-                buffer(                                               \
-                    Lnet/minecraft/client/renderer/MultiBufferSource; \
-                    Ljava/util/function/Function;                     \
-                ) Lcom/mojang/blaze3d/vertex/VertexConsumer;          \
-            """
+            target = "Lnet/minecraft/client/resources/model/Material;buffer(" +
+                "Lnet/minecraft/client/resources/model/MaterialSet;" +
+                "Lnet/minecraft/client/renderer/MultiBufferSource;" +
+                "Ljava/util/function/Function;" +
+            ")Lcom/mojang/blaze3d/vertex/VertexConsumer;"
         )
     )
     private void freeRenderType(
