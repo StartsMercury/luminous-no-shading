@@ -19,14 +19,12 @@ public class ConduitSpecialRendererMixin {
     private boolean wasGui;
 
     @Inject(
-        method = "render",
+        method = "submit",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/resources/model/Material;buffer(" +
-                "Lnet/minecraft/client/resources/model/MaterialSet;" +
-                "Lnet/minecraft/client/renderer/MultiBufferSource;" +
-                "Ljava/util/function/Function;" +
-            ")Lcom/mojang/blaze3d/vertex/VertexConsumer;"
+                target = "Lnet/minecraft/client/resources/model/Material;renderType(" +
+                    "Ljava/util/function/Function;" +
+                ")Lnet/minecraft/client/renderer/RenderType;"
         )
     )
     private void freeRenderType(

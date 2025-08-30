@@ -33,14 +33,12 @@ public class ChestSpecialRendererMixin {
     }
 
     @Inject(
-        method = "render",
+        method = "submit",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/resources/model/Material;buffer(" +
-                "Lnet/minecraft/client/resources/model/MaterialSet;" +
-                "Lnet/minecraft/client/renderer/MultiBufferSource;" +
+            target = "Lnet/minecraft/client/resources/model/Material;renderType(" +
                 "Ljava/util/function/Function;" +
-            ")Lcom/mojang/blaze3d/vertex/VertexConsumer;"
+            ")Lnet/minecraft/client/renderer/RenderType;"
         )
     )
     private void freeRenderType(
