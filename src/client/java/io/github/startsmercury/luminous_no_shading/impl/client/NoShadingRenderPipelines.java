@@ -26,7 +26,7 @@ public final class NoShadingRenderPipelines {
         ) Lcom/mojang/blaze3d/pipeline/RenderPipeline;   \
     """;
 
-    public static RenderPipeline TRANSLUCENT;
+    public static RenderPipeline TRANSLUCENT_TERRAIN;
     public static RenderPipeline ENTITY_SOLID;
     public static RenderPipeline ENTITY_CUTOUT;
     public static RenderPipeline ENTITY_CUTOUT_NO_CULL;
@@ -74,8 +74,8 @@ public final class NoShadingRenderPipelines {
         return pipeline;
     }
 
-    public static void t(final RenderPipeline translucent) {
-        TRANSLUCENT = translucent;
+    public static void tt(final RenderPipeline translucentTerrain) {
+        TRANSLUCENT_TERRAIN = translucentTerrain;
     }
 
     public static void es(final RenderPipeline entitySolid) {

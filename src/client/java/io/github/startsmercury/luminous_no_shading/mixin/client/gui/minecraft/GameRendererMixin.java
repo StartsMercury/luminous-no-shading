@@ -2,6 +2,7 @@ package io.github.startsmercury.luminous_no_shading.mixin.client.gui.minecraft;
 
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import net.minecraft.client.renderer.GameRenderer;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,13 +15,12 @@ public class GameRendererMixin {
         at = @At(
             value = "INVOKE",
             shift = At.Shift.AFTER,
-            target = """
-                Lnet/minecraft/client/gui/GuiGraphics;                     \
-                <init> (                                                   \
-                    Lnet/minecraft/client/Minecraft;                       \
-                    Lnet/minecraft/client/gui/render/state/GuiRenderState; \
-                ) V                                                        \
-            """
+            target = "Lnet/minecraft/client/gui/GuiGraphics;<init>(" +
+                "Lnet/minecraft/client/Minecraft;" +
+                "Lnet/minecraft/client/gui/render/state/GuiRenderState;" +
+                "I" +
+                "I" +
+            ")V"
         )
     )
     private void applyRenderTypes(final CallbackInfo callback) {
@@ -35,7 +35,8 @@ public class GameRendererMixin {
         method = "render",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;NONE:Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;"
+            target = "Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;NONE:Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;",
+            opcode = Opcodes.GETSTATIC
         )
     )
     private void resetRenderTypes(final CallbackInfo callback) {

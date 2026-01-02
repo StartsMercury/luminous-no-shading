@@ -7,10 +7,10 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.shaders.ShaderType;
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingGlslPreprocessor;
-import net.minecraft.FileUtil;
 import net.minecraft.client.renderer.ShaderManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.util.FileUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +23,7 @@ public abstract class ShaderManagerMixin {
     @Inject(
         method = """
             loadShader (                                         \
-                Lnet/minecraft/resources/ResourceLocation;       \
+                Lnet/minecraft/resources/Identifier;       \
                 Lnet/minecraft/server/packs/resources/Resource;  \
                 Lcom/mojang/blaze3d/shaders/ShaderType;          \
                 Ljava/util/Map;                                  \
@@ -40,17 +40,17 @@ public abstract class ShaderManagerMixin {
     )
     private static void loadCustomShader(
         final CallbackInfo callback,
-        final @Local(ordinal = 0, argsOnly = true) ResourceLocation resourceLocation,
+        final @Local(ordinal = 0, argsOnly = true) Identifier identifier,
         final @Local(ordinal = 0, argsOnly = true) ShaderType type,
-        final @Local(ordinal = 0, argsOnly = true) Map<ResourceLocation, Resource> map,
+        final @Local(ordinal = 0, argsOnly = true) Map<Identifier, Resource> map,
         final @Local(ordinal = 0, argsOnly = true) ImmutableMap.Builder<
             ShaderManager.ShaderSourceKey,
             String
         > builder,
-        final @Local(ordinal = 1) ResourceLocation resourceLocation2,
+        final @Local(ordinal = 1) Identifier identifier2,
         final @Local(ordinal = 0) String string
     ) {
-        switch (resourceLocation.getPath()) {
+        switch (identifier.getPath()) {
             case "shaders/core/rendertype_item_entity_translucent_cull.vsh",
                  "shaders/core/terrain.vsh":
                 break;
@@ -59,13 +59,13 @@ public abstract class ShaderManagerMixin {
         }
 
         final var glslPreprocessor = new NoShadingGlslPreprocessor(
-            resourceLocation.withPath(FileUtil::getFullResourcePath),
+            identifier.withPath(FileUtil::getFullResourcePath),
             map
         );
 
         builder.put(
             new ShaderManager.ShaderSourceKey(
-                resourceLocation2.withPath(
+                identifier2.withPath(
                     path -> path + LuminousNoShadingImpl.NO_SHADING_SUFFIX
                 ),
                 type
@@ -93,24 +93,24 @@ public abstract class ShaderManagerMixin {
         final K key,
         final V value,
         final Operation<ImmutableMap.Builder<K, V>> original,
-        final @Local(ordinal = 0, argsOnly = true) ResourceLocation resourceLocation,
-        final @Local(ordinal = 1) ResourceLocation resourceLocation2
+        final @Local(ordinal = 0, argsOnly = true) Identifier identifier,
+        final @Local(ordinal = 1) Identifier identifier2
     ) {
         instance = original.call(instance, key, value);
 
-        switch (resourceLocation.getPath()) {
+        switch (identifier.getPath()) {
             case "post_effect/entity_cutout.json",
                  "post_effect/entity_cutout_no_cull.json",
                  "post_effect/entity_solid.json":
                 break;
             default:
-                return null;
+                return instance;
         }
 
-        final var resourceLocation3 = resourceLocation2.withPath(
+        final var identifier3 = identifier2.withPath(
             path -> path + LuminousNoShadingImpl.LUMINOUS_SUFFIX
         );
 
-        return instance.put(resourceLocation3, value);
+        return instance.put(identifier3, value);
     }
 }

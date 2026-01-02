@@ -24,7 +24,7 @@ public class ConduitSpecialRendererMixin {
             value = "INVOKE",
                 target = "Lnet/minecraft/client/resources/model/Material;renderType(" +
                     "Ljava/util/function/Function;" +
-                ")Lnet/minecraft/client/renderer/RenderType;"
+                ")Lnet/minecraft/client/renderer/rendertype/RenderType;"
         )
     )
     private void freeRenderType(

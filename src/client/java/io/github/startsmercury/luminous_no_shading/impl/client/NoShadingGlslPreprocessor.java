@@ -2,11 +2,11 @@ package io.github.startsmercury.luminous_no_shading.impl.client;
 
 import com.mojang.blaze3d.preprocessor.GlslPreprocessor;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
-import net.minecraft.FileUtil;
-import net.minecraft.ResourceLocationException;
+import net.minecraft.IdentifierException;
 import net.minecraft.client.renderer.ShaderManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.util.FileUtil;
 import net.minecraft.util.StringUtil;
 import org.apache.commons.io.IOUtils;
 
@@ -74,15 +74,15 @@ public class NoShadingGlslPreprocessor extends GlslPreprocessor {
             .replace("${helperFunctionName}", helperFunctionName);
     }
 
-    private final ResourceLocation val$resourceLocation2;
+    private final Identifier val$resourceLocation2;
 
-    private final Map<ResourceLocation, Resource> val$map;
+    private final Map<Identifier, Resource> val$map;
 
-    private final Set<ResourceLocation> importedLocations = new ObjectArraySet<>();
+    private final Set<Identifier> importedLocations = new ObjectArraySet<>();
 
     public NoShadingGlslPreprocessor(
-        final ResourceLocation val$resourceLocation2,
-        final Map<ResourceLocation, Resource> val$map
+        final Identifier val$resourceLocation2,
+        final Map<Identifier, Resource> val$map
     ) {
         this.val$resourceLocation2 = val$resourceLocation2;
         this.val$map = val$map;
@@ -90,17 +90,17 @@ public class NoShadingGlslPreprocessor extends GlslPreprocessor {
 
     @Override
     public String applyImport(boolean bl, String string) {
-        ResourceLocation resourceLocation;
+        Identifier resourceLocation;
         try {
             if (bl) {
                 resourceLocation = val$resourceLocation2.withPath(
                     string2 -> FileUtil.normalizeResourcePath(string2 + string)
                 );
             } else {
-                resourceLocation = ResourceLocation.parse(string)
+                resourceLocation = Identifier.parse(string)
                     .withPrefix("shaders/include/");
             }
-        } catch (ResourceLocationException var8) {
+        } catch (IdentifierException var8) {
             ShaderManager.LOGGER.error(
                 "Malformed GLSL import {}: {}",
                 string,

@@ -4,13 +4,15 @@ import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ReferenceSet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.ConduitRenderer;
 import net.minecraft.client.renderer.blockentity.EnchantTableRenderer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import org.slf4j.LoggerFactory;
 
 public class LuminousNoShadingImpl {
@@ -30,12 +32,12 @@ public class LuminousNoShadingImpl {
 		ClearRenderType.clear(ConduitRenderer.VERTICAL_WIND_TEXTURE);
 		ClearRenderType.clear(ConduitRenderer.OPEN_EYE_TEXTURE);
 		ClearRenderType.clear(ConduitRenderer.CLOSED_EYE_TEXTURE);
-		ClearRenderType.clear(EnchantTableRenderer.BOOK_LOCATION);
+		ClearRenderType.clear(EnchantTableRenderer.BOOK_TEXTURE);
 	}
 
 	public static void applyMinimalRenderTypes() {
 		ConduitRenderer.SHELL_TEXTURE.renderType(NoShadingRenderTypes::entitySolid);
-		Sheets.ENDER_CHEST_LOCATION.renderType(atlasLocations -> RenderType.entityCutout(
+		Sheets.ENDER_CHEST_LOCATION.renderType(atlasLocations -> RenderTypes.entityCutout(
 				LuminousNoShadingImpl.mangle(atlasLocations)
 		));
 	}
@@ -48,7 +50,7 @@ public class LuminousNoShadingImpl {
 		ConduitRenderer.VERTICAL_WIND_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
 		ConduitRenderer.OPEN_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
 		ConduitRenderer.CLOSED_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
-		EnchantTableRenderer.BOOK_LOCATION.renderType(NoShadingRenderTypes::entitySolid);
+		EnchantTableRenderer.BOOK_TEXTURE.renderType(NoShadingRenderTypes::entitySolid);
 	}
 
 	private static boolean guiOnly;
@@ -80,15 +82,15 @@ public class LuminousNoShadingImpl {
 		LuminousNoShadingImpl.onGui = onGui;
 	}
 
-	public static ResourceLocation mangle(final ResourceLocation resourceLocation) {
-		return ResourceLocation.fromNamespaceAndPath("luminous-no-shading", resourceLocation.getPath());
+	public static Identifier mangle(final Identifier identifier) {
+		return Identifier.fromNamespaceAndPath("luminous-no-shading", identifier.getPath());
 	}
 
-	public static RenderType modifyBlockRenderType(final RenderType original, final BlockState state) {
-		if (state.getLightEmission() <= 0) {
-			return original;
-		} else if (original == Sheets.translucentItemSheet()) {
-			return NoShadingSheets.translucentItemSheet();
+	public static RenderType modifyBlockRenderType(final RenderType original, final ItemStack stack) {
+        if (!(stack.getItem() instanceof final BlockItem item) || item.getBlock().defaultBlockState().getLightEmission() <= 0) {
+            return original;
+        } else if (original == Sheets.translucentBlockItemSheet()) {
+			return NoShadingSheets.translucentBlockItemSheet();
 		} else if (original == Sheets.cutoutBlockSheet()) {
 			return NoShadingSheets.cutoutBlockSheet();
 		} else {
@@ -96,6 +98,17 @@ public class LuminousNoShadingImpl {
 			return original;
 		}
 	}
+
+    public static RenderType modifyItemRenderType(final RenderType original, final ItemStack stack) {
+        if (!(stack.getItem() instanceof final BlockItem item) || item.getBlock().defaultBlockState().getLightEmission() <= 0) {
+            return original;
+        } else if (original == Sheets.translucentItemSheet()) {
+            return NoShadingSheets.translucentItemSheet();
+        } else {
+            handleUnexpectedRenderType(original);
+            return original;
+        }
+    }
 
     private static ReferenceSet<RenderType> unknowns;
 

@@ -2,11 +2,11 @@ package io.github.startsmercury.luminous_no_shading.mixin.client.entity.minecraf
 
 import io.github.startsmercury.luminous_no_shading.impl.client.LuminousNoShadingImpl;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingRenderTypes;
-import net.minecraft.client.model.BlazeModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.model.monster.blaze.BlazeModel;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,7 +22,7 @@ public abstract class BlazeModelMixin extends EntityModel<LivingEntityRenderStat
     private void makeItGlow(final CallbackInfo callback) {
         this.renderType = resourceLocation -> {
             if (!LuminousNoShadingImpl.isOnGui() && LuminousNoShadingImpl.isGuiOnly()) {
-                return RenderType.entityCutoutNoCull(resourceLocation);
+                return RenderTypes.entityCutoutNoCull(resourceLocation);
             } else {
                 return NoShadingRenderTypes.entityCutoutNoCull(resourceLocation);
             }

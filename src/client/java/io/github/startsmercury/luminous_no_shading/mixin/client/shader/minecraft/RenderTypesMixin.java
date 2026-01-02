@@ -7,36 +7,42 @@ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import io.github.startsmercury.luminous_no_shading.impl.client.NoShadingRenderPipelines;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RenderType.class)
-public abstract class RenderTypeMixin {
+@Mixin(RenderTypes.class)
+public abstract class RenderTypesMixin {
     @Inject(
-        method = { "method_34832", "method_34826", "method_62288", "method_34824" },
+        method = { "method_75987", "method_75962", "method_75960", "method_75959" },
         at = @At("HEAD")
     )
     private static void detectCustom(
         final CallbackInfoReturnable<RenderType> callback,
-        final @Local(ordinal = 0, argsOnly = true) LocalRef<ResourceLocation> resourceLocationRef,
+        final @Local(ordinal = 0, argsOnly = true) LocalRef<Identifier> resourceLocationRef,
         final @Share("custom") LocalBooleanRef custom
     ) {
         final var resourceLocation = resourceLocationRef.get();
         if ("luminous-no-shading".equals(resourceLocation.getNamespace())) {
             resourceLocationRef.set(
-                ResourceLocation.withDefaultNamespace(resourceLocation.getPath())
+                Identifier.withDefaultNamespace(resourceLocation.getPath())
             );
             custom.set(true);
         }
     }
 
     @ModifyExpressionValue(
-        method = "method_34832",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT_NO_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;")
+        method = "method_75987",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT_NO_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            opcode = Opcodes.GETSTATIC
+        )
     )
     private static RenderPipeline createCustomEntityCutoutNoCullProvider(
         final RenderPipeline original,
@@ -50,8 +56,12 @@ public abstract class RenderTypeMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_34826",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_SOLID:Lcom/mojang/blaze3d/pipeline/RenderPipeline;")
+        method = "method_75962",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_SOLID:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            opcode = Opcodes.GETSTATIC
+        )
     )
     private static RenderPipeline createCustomEntitySolidProvider(
         final RenderPipeline original,
@@ -65,8 +75,12 @@ public abstract class RenderTypeMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_62288",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;")
+        method = "method_75960",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            opcode = Opcodes.GETSTATIC
+        )
     )
     private static RenderPipeline createCustomEntityCutoutProvider(
         final RenderPipeline original,
@@ -80,8 +94,12 @@ public abstract class RenderTypeMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_34824",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_ENTITY_TRANSLUCENT_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;")
+        method = "method_75959",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_ENTITY_TRANSLUCENT_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            opcode = Opcodes.GETSTATIC
+        )
     )
     private static RenderPipeline createCustomItemEntityTranslucentCullProvider(
         final RenderPipeline original,

@@ -36,14 +36,14 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", target = M_BUILD, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/translucent"
+            args = "stringValue=pipeline/translucent_terrain"
         ))
     )
     private static RenderPipeline createCustomTranslucent(
         final RenderPipeline.Builder builder,
         final Operation<RenderPipeline> original
     ) {
-        return createNoShading(builder, original, NoShadingRenderPipelines::t);
+        return createNoShading(builder, original, NoShadingRenderPipelines::tt);
     }
 
     @WrapOperation(
@@ -114,12 +114,12 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = M_REGISTER, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/translucent"
+            args = "stringValue=pipeline/translucent_terrain"
         ))
     )
     private static void registerCustomTranslucent(final CallbackInfo callback) {
-        NoShadingRenderPipelines.TRANSLUCENT =
-            register(NoShadingRenderPipelines.TRANSLUCENT);
+        NoShadingRenderPipelines.TRANSLUCENT_TERRAIN =
+            register(NoShadingRenderPipelines.TRANSLUCENT_TERRAIN);
     }
 
     @Inject(

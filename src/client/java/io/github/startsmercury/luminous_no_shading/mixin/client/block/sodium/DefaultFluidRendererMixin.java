@@ -7,6 +7,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import net.caffeinemc.mods.sodium.client.render.chunk.compile.pipeline.DefaultFluidRenderer;
 import net.caffeinemc.mods.sodium.client.world.LevelSlice;
 import net.minecraft.core.BlockPos;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DefaultFluidRendererMixin {
     @Inject(
         method = "render",
-        at = @At(value = "FIELD", shift = At.Shift.AFTER, ordinal = 0, target = "Lnet/caffeinemc/mods/sodium/client/util/DirectionUtil;HORIZONTAL_DIRECTIONS:[Lnet/minecraft/core/Direction;")
+        at = @At(
+            value = "FIELD",
+            shift = At.Shift.AFTER,
+            ordinal = 0,
+            target = "Lnet/caffeinemc/mods/sodium/client/util/DirectionUtil;HORIZONTAL_DIRECTIONS:[Lnet/minecraft/core/Direction;",
+            opcode = Opcodes.GETSTATIC
+        )
     )
     private void detectLuminosity(
         final CallbackInfo callback,
