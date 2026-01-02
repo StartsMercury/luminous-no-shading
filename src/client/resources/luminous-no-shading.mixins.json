@@ -1,27 +1,29 @@
 {
-    "required": true,
-    "package": "io.github.startsmercury.luminous_no_shading.mixin.client",
-    "compatibilityLevel": "JAVA_21",
-    "client": [
-        "block.minecraft.LiquidBlockRendererMixin",
-        "block.minecraft.ModelBlockRendererMixin",
-        "block.sodium.AbstractBlockRenderContextMixin",
-        "block.sodium.DefaultFluidRendererMixin",
-        "block_entity.minecraft.MaterialMixin",
-        "compat.iris.IrisConfigMixin",
-        "entity.minecraft.EntityRenderersMixin",
-        "gui.minecraft.GameRendererMixin",
-        "item.minecraft.ChestSpecialRendererMixin",
-        "item.minecraft.ConduitSpecialRendererMixin",
-        "item.minecraft.ItemBlockRenderTypesMixin",
-        "shader.minecraft.RenderPipeline$BuilderMixin",
-        "shader.minecraft.RenderPipelinesMixin",
-        "shader.minecraft.RenderTypeMixin",
-        "shader.minecraft.ShaderDefines$BuilderMixin",
-        "shader.minecraft.ShaderManagerMixin",
-        "shader.minecraft.SheetsMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+  "required": true,
+  "package": "io.github.startsmercury.luminous_no_shading.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "block.minecraft.LiquidBlockRendererMixin",
+    "block.minecraft.ModelBlockRendererMixin",
+    "block.sodium.AbstractBlockRenderContextMixin",
+    "block.sodium.DefaultFluidRendererMixin",
+    "block_entity.minecraft.MaterialMixin",
+    "compat.iris.IrisConfigMixin",
+    "entity.minecraft.EntityRenderersMixin",
+    "gui.minecraft.GameRendererMixin",
+    "item.minecraft.ChestSpecialRendererMixin",
+    "item.minecraft.ConduitSpecialRendererMixin",
+    "item.minecraft.ItemBlockRenderTypesMixin",
+    "item.minecraft.ItemModelResolverMixin",
+    "item.minecraft.ItemStackRenderStateMixin",
+    "shader.minecraft.RenderPipeline$BuilderMixin",
+    "shader.minecraft.RenderPipelinesMixin",
+    "shader.minecraft.RenderTypeMixin",
+    "shader.minecraft.ShaderDefines$BuilderMixin",
+    "shader.minecraft.ShaderManagerMixin",
+    "shader.minecraft.SheetsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

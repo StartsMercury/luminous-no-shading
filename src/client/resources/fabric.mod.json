@@ -38,6 +38,9 @@
             ],
             "net/minecraft/class_10149\u0024class_10150": [
                 "io/github/startsmercury/luminous_no_shading/impl/client/ShaderDefines\u0024BuilderExtension"
+            ],
+            "net/minecraft/class_10444": [
+                "io/github/startsmercury/luminous_no_shading/impl/client/ItemStackRenderStateExtension"
             ]
         }
 	},
