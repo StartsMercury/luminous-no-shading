@@ -10,6 +10,7 @@
     "block_entity.minecraft.MaterialMixin",
     "compat.iris.IrisConfigMixin",
     "entity.minecraft.EntityRenderersMixin",
+    "entity.minecraft.LavaSlimeModelMixin",
     "gui.minecraft.GameRendererMixin",
     "item.minecraft.ChestSpecialRendererMixin",
     "item.minecraft.ConduitSpecialRendererMixin",
