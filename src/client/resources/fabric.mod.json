@@ -31,7 +31,15 @@
 				"modmenu.github_releases": "https://github.com/StartsMercury/luminous-no-shading/releases",
 				"modmenu.modrinth": "https://modrinth.com/mod/luminous-no-shading"
 			}
-		}
+		},
+        "loom:injected_interfaces": {
+            "com/mojang/blaze3d/pipeline/RenderPipeline\u0024Builder": [
+                "io/github/startsmercury/luminous_no_shading/impl/client/RenderPipeline\u0024BuilderExtension"
+            ],
+            "net/minecraft/class_10149\u0024class_10150": [
+                "io/github/startsmercury/luminous_no_shading/impl/client/ShaderDefines\u0024BuilderExtension"
+            ]
+        }
 	},
 	"mixins": [
 		"luminous-no-shading.mixins.json"

@@ -14,8 +14,10 @@
         "item.minecraft.ChestSpecialRendererMixin",
         "item.minecraft.ConduitSpecialRendererMixin",
         "item.minecraft.ItemBlockRenderTypesMixin",
+        "shader.minecraft.RenderPipeline$BuilderMixin",
         "shader.minecraft.RenderPipelinesMixin",
         "shader.minecraft.RenderTypeMixin",
+        "shader.minecraft.ShaderDefines$BuilderMixin",
         "shader.minecraft.ShaderManagerMixin",
         "shader.minecraft.SheetsMixin"
     ],

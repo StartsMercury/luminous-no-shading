@@ -66,6 +66,7 @@ public final class NoShadingRenderPipelines {
             .withPath(path -> path + LuminousNoShadingImpl.LUMINOUS_SUFFIX);
         final var customPipeline = builder
             .withLocation(customLocation)
+            .withoutShaderDefine("PER_FACE_LIGHTING")
             .withShaderDefine("NO_CARDINAL_LIGHTING")
             .build();
         setter.accept(customPipeline);
