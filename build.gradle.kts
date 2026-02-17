@@ -78,6 +78,32 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
+                name = "CaffeineMC Maven"
+                url = uri("https://maven.caffeinemc.net/releases")
+                mavenContent {
+                    releasesOnly()
+                }
+            }
+        }
+
+        forRepository {
+            maven {
+                name = "CaffeineMC Snapshots Maven"
+                url = uri("https://maven.caffeinemc.net/snapshots")
+                mavenContent {
+                    snapshotsOnly()
+                }
+            }
+        }
+
+        filter {
+            includeGroup("net.caffeinemc")
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
                 name = "Modrinth Maven"
                 url = uri("https://api.modrinth.com/maven")
             }
@@ -88,19 +114,17 @@ repositories {
         }
     }
 }
-loom {
-    runConfigs {
-        val client by existing {
-            vmArg("-Dmixin.debug=true")
-        }
-    }
-}
+
 run {
     val iris = "maven.modrinth:iris:1.9.7+1.21.10-fabric"
-    val sodium = "maven.modrinth:sodium:mc1.21.11-0.8.4-fabric"
+    val sodium = "net.caffeinemc:sodium-fabric:0.8.4+mc1.21.11"
 
     createCompatTest("iris", iris, sodium)
     createCompatTest("sodium", sodium)
+}
+
+dependencies {
+    modCompileOnly("net.caffeinemc:sodium-fabric-api:0.8.4+mc1.21.11")
 }
 
 /******************************************************************************/
