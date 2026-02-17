@@ -116,7 +116,7 @@ repositories {
 }
 
 run {
-    val iris = "maven.modrinth:iris:1.9.7+1.21.10-fabric"
+    val iris = "maven.modrinth:iris:1.10.5+1.21.11-fabric"
     val sodium = "net.caffeinemc:sodium-fabric:0.8.4+mc1.21.11"
 
     createCompatTest("iris", iris, sodium)
