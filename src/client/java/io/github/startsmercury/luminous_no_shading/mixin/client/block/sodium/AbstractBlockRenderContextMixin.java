@@ -1,7 +1,7 @@
 package io.github.startsmercury.luminous_no_shading.mixin.client.block.sodium;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.caffeinemc.mods.sodium.client.render.frapi.render.AbstractBlockRenderContext;
+import net.caffeinemc.mods.sodium.client.render.model.AbstractBlockRenderContext;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,7 +14,10 @@ public class AbstractBlockRenderContextMixin {
 
     @ModifyExpressionValue(
         method = "shadeQuad",
-        at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/frapi/mesh/MutableQuadViewImpl;hasShade()Z"),
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/caffeinemc/mods/sodium/client/render/model/MutableQuadViewImpl;hasShade()Z"
+        ),
         remap = false
     )
     private boolean modifyShade(final boolean original) {
