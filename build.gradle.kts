@@ -51,6 +51,7 @@ tasks {
         val data = mapOf(
             "version" to Constants.MOD_VERSION,
             "version_java" to libs.versions.java.get(),
+            "version_game" to libs.versions.fabric.minecraft.get(),
             "version_minecraft" to libs.versions.minecraft.get(),
         )
 
