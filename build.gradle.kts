@@ -1,5 +1,5 @@
 object Constants {
-    const val MOD_VERSION = "0.2.5"
+    const val MOD_VERSION = "0.2.6"
 }
 
 plugins {
