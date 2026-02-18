@@ -53,10 +53,10 @@
 		"java": ">=${version_java}",
 		"minecraft": "*"
 	},
-	"suggests": {
+	"recommends": {
 		"minecraft": "${version_game}"
 	},
-	"recommends": {
+	"suggests": {
 		"minecraft": "${version_minecraft}"
 	}
 }
