@@ -3,7 +3,7 @@ fabric-api = "0.141.2+1.21.11"
 fabric-loader = "0.18.4"
 fabric-minecraft = "1.21.11"
 iris = "1.10.5+1.21.11-fabric"
-java = "21"
+java = "25"
 minecraft = "1.21.11"
 sodium = "0.8.4+mc1.21.11"
 
