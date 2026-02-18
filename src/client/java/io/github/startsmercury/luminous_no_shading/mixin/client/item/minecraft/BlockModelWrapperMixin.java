@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BlockModelWrapper.class)
 public class BlockModelWrapperMixin {
-    @ModifyReturnValue(method = "method_76559", at = @At("RETURN"))
+    @ModifyReturnValue(method = "lambda$static$0", at = @At("RETURN"))
     private static RenderType replaceItemRenderType(
         final RenderType original,
         final @Local(ordinal = 0, argsOnly = true) ItemStack itemStack
@@ -23,7 +23,7 @@ public class BlockModelWrapperMixin {
         }
     }
 
-    @ModifyReturnValue(method = "method_76557", at = @At("RETURN"))
+    @ModifyReturnValue(method = "lambda$static$1", at = @At("RETURN"))
     private static RenderType replaceBlockRenderType(
         final RenderType original,
         final @Local(ordinal = 0, argsOnly = true) ItemStack itemStack

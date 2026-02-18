@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(EntityRenderers.class)
 public class EntityRenderersMixin {
-    @Redirect(method = "method_33430", at = @At(value = "NEW", target = "(Lnet/minecraft/client/model/geom/ModelPart;)Lnet/minecraft/client/model/animal/squid/SquidModel;"))
+    @Redirect(method = "lambda$static$17", at = @At(value = "NEW", target = "(Lnet/minecraft/client/model/geom/ModelPart;)Lnet/minecraft/client/model/animal/squid/SquidModel;"))
     private static SquidModel replaceGlowSquidModel(final ModelPart modelPart) {
         return new GlowSquidModel(modelPart);
     }

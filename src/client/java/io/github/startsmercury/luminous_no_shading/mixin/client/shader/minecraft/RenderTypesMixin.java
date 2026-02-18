@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RenderTypes.class)
 public abstract class RenderTypesMixin {
     @Inject(
-        method = { "method_75987", "method_75962", "method_75960", "method_75959" },
+        method = { "lambda$static$7", "lambda$static$4", "lambda$static$6", "lambda$static$9" },
         at = @At("HEAD")
     )
     private static void detectCustom(
@@ -37,7 +37,7 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_75987",
+        method = "lambda$static$7",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT_NO_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
@@ -56,7 +56,7 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_75962",
+        method = "lambda$static$4",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_SOLID:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
@@ -75,7 +75,7 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_75960",
+        method = "lambda$static$6",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
@@ -94,7 +94,7 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "method_75959",
+        method = "lambda$static$9",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_ENTITY_TRANSLUCENT_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
