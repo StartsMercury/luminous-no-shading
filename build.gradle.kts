@@ -1,12 +1,9 @@
 object Constants {
-    const val VERSION = "0.2.5"
-
-    const val VERSION_JAVA = 21
-    const val VERSION_MINECRAFT = "1.21.11"
+    const val MOD_VERSION = "0.2.5"
 }
 
 plugins {
-    id("net.fabricmc.fabric-loom-remap") version "1.15.3"
+    alias(libs.plugins.fabric.loom)
 }
 
 base {
@@ -19,7 +16,7 @@ java {
     withSourcesJar()
 
     toolchain {
-        languageVersion = JavaLanguageVersion.of(Constants.VERSION_JAVA)
+        languageVersion = libs.versions.java.map(JavaLanguageVersion::of)
     }
 }
 
@@ -39,9 +36,9 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${Constants.VERSION_MINECRAFT}")
+    minecraft(libs.minecraft)
     mappings(loom.officialMojangMappings())
-    modImplementation("net.fabricmc:fabric-loader:0.18.4")
+    modImplementation(libs.fabric.loader)
 }
 
 tasks {
@@ -52,9 +49,9 @@ tasks {
 
     withType<ProcessResources> {
         val data = mapOf(
-            "version" to Constants.VERSION,
-            "version_java" to Constants.VERSION_JAVA,
-            "version_minecraft" to Constants.VERSION_MINECRAFT,
+            "version" to Constants.MOD_VERSION,
+            "version_java" to libs.versions.java.get(),
+            "version_minecraft" to libs.versions.minecraft.get(),
         )
 
         inputs.properties(data)
@@ -66,7 +63,6 @@ tasks {
 
     withType<JavaCompile> {
         options.encoding = "UTF-8"
-        options.release = Constants.VERSION_JAVA
     }
 }
 
@@ -116,15 +112,12 @@ repositories {
 }
 
 run {
-    val iris = "maven.modrinth:iris:1.10.5+1.21.11-fabric"
-    val sodium = "net.caffeinemc:sodium-fabric:0.8.4+mc1.21.11"
-
-    createCompatTest("iris", iris, sodium)
-    createCompatTest("sodium", sodium)
+    createCompatTest("iris", libs.iris, libs.sodium.fabric)
+    createCompatTest("sodium", libs.sodium.fabric)
 }
 
 dependencies {
-    modCompileOnly("net.caffeinemc:sodium-fabric-api:0.8.4+mc1.21.11")
+    modCompileOnly(libs.sodium.api)
 }
 
 /******************************************************************************/
@@ -165,13 +158,13 @@ fun createVersionString(): String {
     val buildId = System.getenv("GITHUB_RUN_NUMBER")
 
     if (isReleaseBuild) {
-        builder.append(Constants.VERSION)
+        builder.append(Constants.MOD_VERSION)
     } else {
-        builder.append(Constants.VERSION.substringBefore('-'))
+        builder.append(Constants.MOD_VERSION.substringBefore('-'))
         builder.append("-snapshot")
     }
 
-    builder.append("+mc").append(Constants.VERSION_MINECRAFT)
+    builder.append("+mc").append(libs.versions.minecraft.get())
 
     if (!isReleaseBuild) {
         if (buildId != null) {
