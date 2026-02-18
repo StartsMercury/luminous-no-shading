@@ -1,4 +1,4 @@
-accessWidener v2 named
+accessWidener v2 official
 
 mutable    field  net/minecraft/client/model/Model renderType Ljava/util/function/Function;
 accessible class  net/minecraft/client/renderer/ShaderManager$ShaderSourceKey

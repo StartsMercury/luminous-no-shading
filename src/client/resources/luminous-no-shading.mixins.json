@@ -5,10 +5,7 @@
   "client": [
     "block.minecraft.LiquidBlockRendererMixin",
     "block.minecraft.ModelBlockRendererMixin",
-    "block.sodium.AbstractBlockRenderContextMixin",
-    "block.sodium.DefaultFluidRendererMixin",
     "block_entity.minecraft.MaterialMixin",
-    "compat.iris.IrisConfigMixin",
     "entity.minecraft.BlazeModelMixin",
     "entity.minecraft.EntityRenderersMixin",
     "entity.minecraft.MagmaCubeModelMixin",

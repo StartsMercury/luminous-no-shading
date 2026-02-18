@@ -37,8 +37,7 @@ repositories {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
-    modImplementation(libs.fabric.loader)
+    implementation(libs.fabric.loader)
 }
 
 tasks {
@@ -113,12 +112,14 @@ repositories {
 }
 
 run {
-    createCompatTest("iris", libs.iris, libs.sodium.fabric)
-    createCompatTest("sodium", libs.sodium.fabric)
+    // TODO Uncomment when those have builds for unobfuscated minecraft
+//    createCompatTest("iris", libs.iris, libs.sodium.fabric)
+//    createCompatTest("sodium", libs.sodium.fabric)
 }
 
 dependencies {
-    modCompileOnly(libs.sodium.api)
+    // TODO Uncomment when those have builds for unobfuscated minecraft
+//    compileOnly(libs.sodium.api)
 }
 
 /******************************************************************************/
@@ -131,7 +132,7 @@ fun createCompatTest(name: String, objectNotation: Any, vararg dependencyNotatio
         extendsFrom(config.get())
     }
     configurations {
-        val modCompileOnly by getting {
+        val compileOnly by getting {
             extendsFrom(config.get())
         }
     }
