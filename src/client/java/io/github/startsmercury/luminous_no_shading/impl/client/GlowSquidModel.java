@@ -8,11 +8,10 @@ public class GlowSquidModel extends SquidModel {
     public GlowSquidModel(final ModelPart modelPart) {
         super(modelPart);
         this.renderType = identifier -> {
-            // TODO there seems to be a regression here
             if (!LuminousNoShadingImpl.isOnGui() && LuminousNoShadingImpl.isGuiOnly()) {
-                return RenderTypes.entityCutoutNoCull(identifier);
+                return RenderTypes.entityCutout(identifier);
             } else {
-                return NoShadingRenderTypes.entityCutoutNoCull(identifier);
+                return NoShadingRenderTypes.entityCutout(identifier);
             }
         };
     }

@@ -22,9 +22,9 @@ public abstract class BlazeModelMixin extends EntityModel<LivingEntityRenderStat
     private void makeItGlow(final CallbackInfo callback) {
         this.renderType = resourceLocation -> {
             if (!LuminousNoShadingImpl.isOnGui() && LuminousNoShadingImpl.isGuiOnly()) {
-                return RenderTypes.entityCutoutNoCull(resourceLocation);
+                return RenderTypes.entityCutout(resourceLocation);
             } else {
-                return NoShadingRenderTypes.entityCutoutNoCull(resourceLocation);
+                return NoShadingRenderTypes.entityCutout(resourceLocation);
             }
         };
     }

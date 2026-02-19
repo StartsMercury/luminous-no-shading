@@ -45,11 +45,11 @@ public class LuminousNoShadingImpl {
 	public static void applyRenderTypes() {
 		LuminousNoShadingImpl.applyMinimalRenderTypes();
 
-		ConduitRenderer.ACTIVE_SHELL_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
-		ConduitRenderer.WIND_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
-		ConduitRenderer.VERTICAL_WIND_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
-		ConduitRenderer.OPEN_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
-		ConduitRenderer.CLOSED_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutoutNoCull);
+		ConduitRenderer.ACTIVE_SHELL_TEXTURE.renderType(NoShadingRenderTypes::entityCutout);
+		ConduitRenderer.WIND_TEXTURE.renderType(NoShadingRenderTypes::entityCutout);
+		ConduitRenderer.VERTICAL_WIND_TEXTURE.renderType(NoShadingRenderTypes::entityCutout);
+		ConduitRenderer.OPEN_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutout);
+		ConduitRenderer.CLOSED_EYE_TEXTURE.renderType(NoShadingRenderTypes::entityCutout);
 		EnchantTableRenderer.BOOK_TEXTURE.renderType(NoShadingRenderTypes::entitySolid);
 	}
 
@@ -91,8 +91,8 @@ public class LuminousNoShadingImpl {
             return original;
         } else if (original == Sheets.translucentBlockItemSheet()) {
 			return NoShadingSheets.translucentBlockItemSheet();
-		} else if (original == Sheets.cutoutBlockSheet()) {
-			return NoShadingSheets.cutoutBlockSheet();
+		} else if (original == Sheets.cutoutBlockItemSheet()) {
+			return NoShadingSheets.cutoutBlockItemSheet();
 		} else {
 			handleUnexpectedRenderType(original);
 			return original;

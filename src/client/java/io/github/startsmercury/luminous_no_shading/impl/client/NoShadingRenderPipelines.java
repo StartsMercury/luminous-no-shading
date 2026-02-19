@@ -26,11 +26,10 @@ public final class NoShadingRenderPipelines {
         ) Lcom/mojang/blaze3d/pipeline/RenderPipeline;   \
     """;
 
-    public static RenderPipeline TRANSLUCENT_TERRAIN;
     public static RenderPipeline ENTITY_SOLID;
     public static RenderPipeline ENTITY_CUTOUT;
-    public static RenderPipeline ENTITY_CUTOUT_NO_CULL;
-    public static RenderPipeline ITEM_ENTITY_TRANSLUCENT_CULL;
+    public static RenderPipeline ITEM_TRANSLUCENT;
+    public static RenderPipeline ITEM_CUTOUT;
 
     public static RenderPipeline createNoShading(
         final RenderPipeline.Builder builder,
@@ -74,10 +73,6 @@ public final class NoShadingRenderPipelines {
         return pipeline;
     }
 
-    public static void tt(final RenderPipeline translucentTerrain) {
-        TRANSLUCENT_TERRAIN = translucentTerrain;
-    }
-
     public static void es(final RenderPipeline entitySolid) {
         ENTITY_SOLID = entitySolid;
     }
@@ -86,11 +81,11 @@ public final class NoShadingRenderPipelines {
         ENTITY_CUTOUT = entityCutout;
     }
 
-    public static void ecnc(final RenderPipeline entityCutoutNoCull) {
-        ENTITY_CUTOUT_NO_CULL = entityCutoutNoCull;
+    public static void it(final RenderPipeline itemTranslucent) {
+        ITEM_TRANSLUCENT = itemTranslucent;
     }
 
-    public static void ietc(final RenderPipeline itemEntityTranslucentCell) {
-        ITEM_ENTITY_TRANSLUCENT_CULL = itemEntityTranslucentCell;
+    public static void ic(final RenderPipeline itemCutout) {
+        ITEM_CUTOUT = itemCutout;
     }
 }

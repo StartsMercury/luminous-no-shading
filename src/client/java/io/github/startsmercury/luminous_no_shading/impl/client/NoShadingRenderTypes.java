@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 
 public final class NoShadingRenderTypes {
-    public static RenderType entityCutoutNoCull(final Identifier identifier) {
-        return RenderTypes.entityCutoutNoCull(LuminousNoShadingImpl.mangle(identifier));
+    public static RenderType entityCutout(final Identifier identifier) {
+        return RenderTypes.entityCutout(LuminousNoShadingImpl.mangle(identifier));
     }
 
     public static RenderType entitySolid(final Identifier identifier) {

@@ -36,21 +36,6 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", target = M_BUILD, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/translucent_terrain"
-        ))
-    )
-    private static RenderPipeline createCustomTranslucent(
-        final RenderPipeline.Builder builder,
-        final Operation<RenderPipeline> original
-    ) {
-        return createNoShading(builder, original, NoShadingRenderPipelines::tt);
-    }
-
-    @WrapOperation(
-        method = "<clinit>",
-        at = @At(value = "INVOKE", target = M_BUILD, ordinal = 0),
-        slice = @Slice(from = @At(
-            value = "CONSTANT",
             args = "stringValue=pipeline/entity_cutout"
         ))
     )
@@ -66,14 +51,14 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", target = M_BUILD, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/item_entity_translucent_cull"
+            args = "stringValue=pipeline/item_translucent"
         ))
     )
-    private static RenderPipeline createCustomItemEntityTranslucentCull(
+    private static RenderPipeline createCustomItemTranslucent(
         final RenderPipeline.Builder builder,
         final Operation<RenderPipeline> original
     ) {
-        return createNoShading(builder, original, NoShadingRenderPipelines::ietc);
+        return createNoShading(builder, original, NoShadingRenderPipelines::it);
     }
 
     @WrapOperation(
@@ -81,14 +66,14 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", target = M_BUILD, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/entity_cutout_no_cull"
+            args = "stringValue=pipeline/item_cutout"
         ))
     )
-    private static RenderPipeline createCustomEntityCutoutNoCull(
+    private static RenderPipeline createCustomItemCutout(
         final RenderPipeline.Builder builder,
         final Operation<RenderPipeline> original
     ) {
-        return createLuminous(builder, original, NoShadingRenderPipelines::ecnc);
+        return createNoShading(builder, original, NoShadingRenderPipelines::ic);
     }
 
     @Shadow
@@ -114,19 +99,6 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = M_REGISTER, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/translucent_terrain"
-        ))
-    )
-    private static void registerCustomTranslucent(final CallbackInfo callback) {
-        NoShadingRenderPipelines.TRANSLUCENT_TERRAIN =
-            register(NoShadingRenderPipelines.TRANSLUCENT_TERRAIN);
-    }
-
-    @Inject(
-        method = "<clinit>",
-        at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = M_REGISTER, ordinal = 0),
-        slice = @Slice(from = @At(
-            value = "CONSTANT",
             args = "stringValue=pipeline/entity_cutout"
         ))
     )
@@ -140,11 +112,24 @@ public abstract class RenderPipelinesMixin {
         at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = M_REGISTER, ordinal = 0),
         slice = @Slice(from = @At(
             value = "CONSTANT",
-            args = "stringValue=pipeline/item_entity_translucent_cull"
+            args = "stringValue=pipeline/item_translucent"
         ))
     )
-    private static void registerCustomItemEntityTranslucentCull(final CallbackInfo callback) {
-        NoShadingRenderPipelines.ITEM_ENTITY_TRANSLUCENT_CULL =
-            register(NoShadingRenderPipelines.ITEM_ENTITY_TRANSLUCENT_CULL);
+    private static void registerCustomItemTranslucent(final CallbackInfo callback) {
+        NoShadingRenderPipelines.ITEM_TRANSLUCENT =
+            register(NoShadingRenderPipelines.ITEM_TRANSLUCENT);
+    }
+
+    @Inject(
+        method = "<clinit>",
+        at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = M_REGISTER, ordinal = 0),
+        slice = @Slice(from = @At(
+            value = "CONSTANT",
+            args = "stringValue=pipeline/item_cutout"
+        ))
+    )
+    private static void registerCustomItemCutout(final CallbackInfo callback) {
+        NoShadingRenderPipelines.ITEM_CUTOUT =
+            register(NoShadingRenderPipelines.ITEM_CUTOUT);
     }
 }

@@ -51,7 +51,7 @@ public abstract class ShaderManagerMixin {
         final @Local(ordinal = 0) String string
     ) {
         switch (identifier.getPath()) {
-            case "shaders/core/rendertype_item_entity_translucent_cull.vsh",
+            case "shaders/core/item.vsh",
                  "shaders/core/terrain.vsh":
                 break;
             default:
@@ -100,7 +100,6 @@ public abstract class ShaderManagerMixin {
 
         switch (identifier.getPath()) {
             case "post_effect/entity_cutout.json",
-                 "post_effect/entity_cutout_no_cull.json",
                  "post_effect/entity_solid.json":
                 break;
             default:

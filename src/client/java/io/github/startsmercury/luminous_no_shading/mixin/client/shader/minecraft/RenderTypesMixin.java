@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RenderTypes.class)
 public abstract class RenderTypesMixin {
     @Inject(
-        method = { "lambda$static$7", "lambda$static$4", "lambda$static$6", "lambda$static$9" },
+        method = { "lambda$static$4", "lambda$static$7", "lambda$static$11", "lambda$static$12" },
         at = @At("HEAD")
     )
     private static void detectCustom(
@@ -33,25 +33,6 @@ public abstract class RenderTypesMixin {
                 Identifier.withDefaultNamespace(resourceLocation.getPath())
             );
             custom.set(true);
-        }
-    }
-
-    @ModifyExpressionValue(
-        method = "lambda$static$7",
-        at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT_NO_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
-            opcode = Opcodes.GETSTATIC
-        )
-    )
-    private static RenderPipeline createCustomEntityCutoutNoCullProvider(
-        final RenderPipeline original,
-        final @Share("custom") LocalBooleanRef custom
-    ) {
-        if (custom.get()) {
-            return NoShadingRenderPipelines.ENTITY_CUTOUT_NO_CULL;
-        } else {
-            return original;
         }
     }
 
@@ -75,7 +56,7 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "lambda$static$6",
+        method = "lambda$static$7",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/client/renderer/RenderPipelines;ENTITY_CUTOUT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
@@ -94,19 +75,38 @@ public abstract class RenderTypesMixin {
     }
 
     @ModifyExpressionValue(
-        method = "lambda$static$9",
+        method = "lambda$static$11",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_ENTITY_TRANSLUCENT_CULL:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_CUTOUT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
             opcode = Opcodes.GETSTATIC
         )
     )
-    private static RenderPipeline createCustomItemEntityTranslucentCullProvider(
+    private static RenderPipeline createCustomItemCutoutProvider(
         final RenderPipeline original,
         final @Share("custom") LocalBooleanRef custom
     ) {
         if (custom.get()) {
-            return NoShadingRenderPipelines.ITEM_ENTITY_TRANSLUCENT_CULL;
+            return NoShadingRenderPipelines.ITEM_CUTOUT;
+        } else {
+            return original;
+        }
+    }
+
+    @ModifyExpressionValue(
+        method = "lambda$static$12",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/RenderPipelines;ITEM_TRANSLUCENT:Lcom/mojang/blaze3d/pipeline/RenderPipeline;",
+            opcode = Opcodes.GETSTATIC
+        )
+    )
+    private static RenderPipeline createCustomItemTranslucentProvider(
+        final RenderPipeline original,
+        final @Share("custom") LocalBooleanRef custom
+    ) {
+        if (custom.get()) {
+            return NoShadingRenderPipelines.ITEM_TRANSLUCENT;
         } else {
             return original;
         }
