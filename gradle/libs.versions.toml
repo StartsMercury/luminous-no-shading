@@ -1,9 +1,9 @@
 [versions]
 fabric-loader = "0.18.4"
-fabric-minecraft = "26.1-alpha.4"
+fabric-minecraft = "26.1-alpha.5"
 iris = "1.10.5+1.21.11-fabric"
 java = "25"
-minecraft = "26.1-snapshot-4"
+minecraft = "26.1-snapshot-5"
 sodium = "0.8.4+mc1.21.11"
 
 [libraries]
